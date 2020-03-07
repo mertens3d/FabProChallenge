@@ -8,7 +8,15 @@ namespace FabPro.Shared.Views
     /// </summary>
     public partial class MainControl : Window
     {
-        internal ManagerHub Hub { get { return DataContext as ManagerHub; } }
+ 
+        internal ManagerHub Hub { get; set; }// { return DataContext as ManagerHub; } }
+
+        internal void InitializeForm(ManagerHub hub)
+        {
+
+            Hub = hub;
+            DataContext = Hub;
+        }
 
         public MainControl()
         {
@@ -19,7 +27,7 @@ namespace FabPro.Shared.Views
         {
             if (Hub != null)
             {
-                Hub.EventManager.OnRequestTriggerCreate3DView();
+                Hub.EventMan.OnRequestTriggerCreateAssemblyElem();
             }
         }
 
@@ -27,7 +35,7 @@ namespace FabPro.Shared.Views
         {
             if (Hub != null)
             {
-                Hub.EventManager.OnRequestTriggerCreateAssemblySheet();
+                Hub.EventMan.OnRequestTriggerCreateAssemblySheet();
             }
         }
 
@@ -35,7 +43,7 @@ namespace FabPro.Shared.Views
         {
             if (Hub != null)
             {
-                Hub.EventManager.OnRequestTriggerCreate3DView();
+                Hub.EventMan.OnRequestTriggerCreate3DView();
             }
         }
 
@@ -43,16 +51,15 @@ namespace FabPro.Shared.Views
         {
             if (Hub != null)
             {
-                Hub.EventManager.OnRequestPlaceOnSheet();
+                Hub.EventMan.OnRequestPlaceOnSheet();
             }
-
         }
 
         private void IdAddMarkTags_Click(object sender, RoutedEventArgs e)
         {
             if (Hub != null)
             {
-                Hub.EventManager.OnRequestTriggerCreate3DView();
+                Hub.EventMan.OnRequestTriggerAddMarks();
             }
         }
 
@@ -60,7 +67,7 @@ namespace FabPro.Shared.Views
         {
             if (Hub != null)
             {
-                Hub.EventManager.OnRequestTriggerCreate3DView();
+                Hub.EventMan.OnRequestTriggerCreateTopView();
             }
         }
 
@@ -68,7 +75,7 @@ namespace FabPro.Shared.Views
         {
             if (Hub != null)
             {
-                Hub.EventManager.OnRequestTriggerCreate3DView();
+                Hub.EventMan.OnRequestTriggerCreateFrontView();
             }
         }
 
@@ -76,7 +83,7 @@ namespace FabPro.Shared.Views
         {
             if (Hub != null)
             {
-                Hub.EventManager.OnRequestTriggerCreate3DView();
+                Hub.EventMan.OnRequestTriggerCreateDimensionTopandFrontViews();
             }
         }
 
@@ -84,7 +91,7 @@ namespace FabPro.Shared.Views
         {
             if (Hub != null)
             {
-                Hub.EventManager.OnRequestTriggerCreate3DView();
+                Hub.EventMan.OnRequestTriggerCreateBOM();
             }
         }
     }

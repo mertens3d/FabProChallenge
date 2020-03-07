@@ -20,6 +20,7 @@ namespace mertens3d.FabPro.Shared.Managers
             try
             {
                 var mainMenu = new MainControl();
+                mainMenu.InitializeForm(Hub);
                 mainMenu.ShowDialog();
             }
             catch (Exception ex)

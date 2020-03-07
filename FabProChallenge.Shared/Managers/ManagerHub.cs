@@ -1,5 +1,6 @@
 ﻿using FabPro.Shared.Interfaces;
 using mertens3d.FabPro.Shared.Managers;
+using System;
 
 namespace FabPro.Shared.Managers
 {
@@ -7,24 +8,31 @@ namespace FabPro.Shared.Managers
     {
         private UiManager _uiManager;
         private EventsManager _eventManager;
+        private RevitManager _revitManager;
 
-        public UiManager UiManager { get { return _uiManager ?? (_uiManager = new UiManager(this)); } }
-        public EventsManager EventManager { get { return _eventManager ?? (_eventManager = new EventsManager(this)); } }
+        public UiManager UiMan { get { return _uiManager ?? (_uiManager = new UiManager(this)); } }
+        public EventsManager EventMan { get { return _eventManager ?? (_eventManager = new EventsManager(this)); } }
+        public RevitManager RevitMan { get { return _revitManager ?? (_revitManager = new RevitManager(this)); } }
 
         public ManagerHub(IVerSpec verSpec)
         {
-            VerSpect = verSpec;
+            VerSpec = verSpec;
         }
 
-        public IVerSpec VerSpect { get; private set; }
+        public IVerSpec VerSpec { get; private set; }
 
         public bool TriggerBigBang()
         {
             var result = false;
 
-            UiManager.ShowMenu();
+            UiMan.ShowMenu();
 
-            return result;
+            return true;
+        }
+
+        public void Init()
+        {
+            RevitMan.Init();
         }
     }
 }

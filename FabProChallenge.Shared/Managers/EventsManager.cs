@@ -3,23 +3,39 @@ using System;
 
 namespace mertens3d.FabPro.Shared.Managers
 {
-    public class EventsManager: ManagerBase
+    public class EventsManager : ManagerBase
     {
         public EventsManager(ManagerHub hub) : base(hub)
         {
-
         }
 
         internal event Action ActionTriggerCreateAssembly;
+
         internal event Action ActionTriggerCreateAssemblySheet;
+
         internal event Action ActionTriggerPlaceOnSheet;
+
         internal event Action ActionTriggerCreateBOM;
+
         internal event Action ActionTriggerCreateTopAndFrontViews;
+
         internal event Action ActionTriggerCreateFrontView;
+
         internal event Action ActionTriggerCreateTopView;
+
+        internal event Action ActionTriggerCreate3DView;
+
         internal event Action ActionTriggerAddMarks;
 
         protected internal virtual void OnRequestTriggerCreate3DView()
+        {
+            if (ActionTriggerCreate3DView != null)
+            {
+                ActionTriggerCreate3DView.Invoke();
+            }
+        }
+
+        internal void OnRequestTriggerCreateAssemblyElem()
         {
             if (ActionTriggerCreateAssembly != null)
             {

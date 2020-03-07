@@ -49,9 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Interfaces\IRevitTransaction.cs" />
     <Compile Include="Interfaces\IVerSpec.cs" />
+    <Compile Include="Managers\EventsManager.cs" />
     <Compile Include="Managers\ManagerBase.cs" />
     <Compile Include="Managers\ManagerHub.cs" />
+    <Compile Include="Managers\RevitManager.cs" />
     <Compile Include="Managers\UiManager.cs" />
     <Compile Include="Models\AddOnResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

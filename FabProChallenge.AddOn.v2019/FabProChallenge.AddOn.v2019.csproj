@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework" />
     <Reference Include="RevitAddInUtility">
       <HintPath>..\Library\2019\RevitAddInUtility.dll</HintPath>
     </Reference>
@@ -52,10 +53,15 @@
   <ItemGroup>
     <Compile Include="AssemblyFlow.cs" />
     <Compile Include="Models\ManagerHub.cs" />
+    <Compile Include="Models\RevitTransaction.cs" />
     <Compile Include="Models\VerSpec.v2019.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FabProChallenge.FuzzyBunny\FabProChallenge.FuzzyBunny.csproj">
+      <Project>{db27e70e-35d8-4c64-82bd-9c5ff34aaba7}</Project>
+      <Name>FabProChallenge.FuzzyBunny</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FabProChallenge.Shared\FabProChallenge.Shared.csproj">
       <Project>{7E245983-8837-4467-A5B7-923A77E8C9FC}</Project>
       <Name>FabProChallenge.Shared</Name>
