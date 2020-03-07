@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29201.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RevitAddOns", "RevitAddOns", "{D694049F-C9FC-4CD3-962C-5E719E1FFED0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v2019", "v2019", "{24CBC07D-1447-4752-ACA6-1208C194BED0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{60294F9E-2F24-4BB5-98E4-13669358471E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{A9FF3BAA-C16F-4A3E-8C9C-AE06E8E3AF0B}"
+	ProjectSection(SolutionItems) = preProject
+		CsProjArray.js = CsProjArray.js
+		CsVersion.js = CsVersion.js
+		gulpFile.js = gulpFile.js
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FabProChallenge.FuzzyBunny", "FabProChallenge.FuzzyBunny\FabProChallenge.FuzzyBunny.csproj", "{DB27E70E-35D8-4C64-82BD-9C5FF34AABA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FabProChallenge.AddOn.v2019", "FabProChallenge.AddOn.v2019\FabProChallenge.AddOn.v2019.csproj", "{3091BE22-F19C-46E2-ACDF-FBB3DA22197D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FabProChallenge.Shared", "FabProChallenge.Shared\FabProChallenge.Shared.csproj", "{7E245983-8837-4467-A5B7-923A77E8C9FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB27E70E-35D8-4C64-82BD-9C5FF34AABA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB27E70E-35D8-4C64-82BD-9C5FF34AABA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB27E70E-35D8-4C64-82BD-9C5FF34AABA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB27E70E-35D8-4C64-82BD-9C5FF34AABA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3091BE22-F19C-46E2-ACDF-FBB3DA22197D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3091BE22-F19C-46E2-ACDF-FBB3DA22197D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3091BE22-F19C-46E2-ACDF-FBB3DA22197D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3091BE22-F19C-46E2-ACDF-FBB3DA22197D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E245983-8837-4467-A5B7-923A77E8C9FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E245983-8837-4467-A5B7-923A77E8C9FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E245983-8837-4467-A5B7-923A77E8C9FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E245983-8837-4467-A5B7-923A77E8C9FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{24CBC07D-1447-4752-ACA6-1208C194BED0} = {D694049F-C9FC-4CD3-962C-5E719E1FFED0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BF5D129D-A71C-4417-964D-17E426E7D44D}
+	EndGlobalSection
+EndGlobal

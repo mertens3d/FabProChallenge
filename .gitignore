@@ -1,0 +1,10 @@
+/**/obj/Debug/*
+/**/bin/Debug/*
+/node_modules/**/*
+/Library/2019/RevitAddInUtility.dll
+/Library/2019/RevitAPI.dll
+/Library/2019/RevitAPIUI.dll
+/CsProjArray.js
+/CsVersion.js
+/.vs/**/*
+/FabPro Revit Challenge/FabPro Revit Challenge.csproj.user

@@ -1,0 +1,1 @@
+var csVersion = require('./CsVersion.js');
