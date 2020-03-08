@@ -33,9 +33,6 @@
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="RevitAPI">
-      <HintPath>..\Library\2019\RevitAPI.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml" />
@@ -49,8 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Enums\FpViewTypes.cs" />
+    <Compile Include="Interfaces\FpDocState.cs" />
+    <Compile Include="Interfaces\IRevitDocState.cs" />
     <Compile Include="Interfaces\IRevitTransaction.cs" />
     <Compile Include="Interfaces\IVerSpec.cs" />
+    <Compile Include="Interfaces\FpView.cs" />
     <Compile Include="Managers\EventsManager.cs" />
     <Compile Include="Managers\ManagerBase.cs" />
     <Compile Include="Managers\ManagerHub.cs" />
@@ -61,10 +62,17 @@
     <Compile Include="Views\MainControl.xaml.cs">
       <DependentUpon>MainControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Views.xaml.cs">
+      <DependentUpon>Views.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Page Include="Views\MainControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Views.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

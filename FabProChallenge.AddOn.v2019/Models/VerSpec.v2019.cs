@@ -1,6 +1,7 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using FabPro.Shared.Interfaces;
+using FabProChallenge.RevitInterface.vAll.Utilities;
 using mertens3d.FabProChallenge.AddOn.v2019.Models;
 using mertens3d.FabProChallenge.Shared.Interfaces;
 using mertens3d.FabProChallenge.Shared.Models;
@@ -9,15 +10,19 @@ using System.Linq;
 
 namespace mertens3d.FabProAddOn.v2019.Models
 {
-    public class VerSpecV2019 : IVerSpec
+    public class RevitActionsVerSpectV2019 : IRevitActionsVerSpec
     {
-        private ExternalCommandData externalCommandData { get; set; }
+        private IRevitDocState _docState;
+
+        public IRevitDocState DocState { get { return _docState ?? (_docState = new RevitDocState2019(externalCommandData)); } }
 
         public UIDocument ActiveUiDoc { get { return externalCommandData.Application.ActiveUIDocument; } }
         public Document ActiveDoc { get { return ActiveUiDoc.Document; } }
         public View ActiveView { get { return ActiveDoc.ActiveView; } }
 
-        public VerSpecV2019(ExternalCommandData externalCommandData)
+        private ExternalCommandData externalCommandData { get; set; }
+
+        public RevitActionsVerSpectV2019(ExternalCommandData externalCommandData)
         {
             this.externalCommandData = externalCommandData;
         }
@@ -57,29 +62,19 @@ namespace mertens3d.FabProAddOn.v2019.Models
             return toReturn;
         }
 
-        private List<ElementId> GetSelectElements()
-        {
-            var toReturn = ActiveUiDoc
-                .Selection
-                .GetElementIds()
-                .ToList();
-
-            return toReturn;
-        }
-
         public EffortResult CreateAssemblyElem()
         {
             EffortResult toReturn = new EffortResult();
-            List<ElementId> elementIds = GetSelectElements();
+            List<ElementId> SelectElemIds = RevitUtilitiesVAll.GetSelectElements(ActiveUiDoc);
 
-            if (elementIds.Any())
+            if (SelectElemIds.Any())
             {
-                ElementId categoryId = ActiveDoc.GetElement(elementIds.First()).Category.Id;
+                ElementId categoryId = ActiveDoc.GetElement(SelectElemIds.First()).Category.Id;
                 //ElementId categoryId = new ElementId( BuiltInCategory.OST_FabricationPipework);
 
-                if (AssemblyInstance.IsValidNamingCategory(ActiveDoc, categoryId, elementIds))
+                if (AssemblyInstance.IsValidNamingCategory(ActiveDoc, categoryId, SelectElemIds))
                 {
-                    var assemblyInstance = AssemblyInstance.Create(ActiveDoc, elementIds, categoryId);
+                    var assemblyInstance = AssemblyInstance.Create(ActiveDoc, SelectElemIds, categoryId);
                     toReturn.PayloadId = assemblyInstance.Id.IntegerValue;
                     toReturn.MarkSuccessful();
                 }
@@ -118,18 +113,42 @@ namespace mertens3d.FabProAddOn.v2019.Models
         private ElementId GetTitleBlockByName(string targetName)
         {
             var found = new FilteredElementCollector(ActiveDoc)
-                //.OfClass(typeof(AnnotationSymbolType))
+                .OfClass(typeof(FamilySymbol))
                 .OfCategory(BuiltInCategory.OST_TitleBlocks)
                 .FirstOrDefault(x => x.Name.Equals(targetName, System.StringComparison.OrdinalIgnoreCase));
 
             return found.Id;
         }
 
+        private EffortResult AddViewToSheet(int selectSheetId, int selectViewId)
+        {
+            var toReturn = new EffortResult();
+
+            var selectSheetElem = ActiveDoc.GetElement(new ElementId(selectSheetId));
+            var selectViewElem = ActiveDoc.GetElement(new ElementId(selectViewId));
+
+            if (selectViewElem != null && selectViewElem != null)
+            {
+                if (Viewport.CanAddViewToSheet(ActiveDoc, selectSheetElem.Id, selectViewElem.Id))
+                {
+                }
+                else
+                {
+                    toReturn.MarkFailed("Cannot add select element to select view");
+                }
+            }
+            else
+            {
+                toReturn.MarkFailed("Either the Sheet Id or the View Id is invalid");
+            }
+            return toReturn;
+        }
+
         public EffortResult CreateAssemblySheet()
         {
             var toReturn = new EffortResult();
 
-            var selectAssembly = GetSelectElements();
+            var selectAssembly = RevitUtilitiesVAll. GetSelectElements(ActiveUiDoc);
 
             AssemblyInstance assemblyElem = selectAssembly
                 .Select(x => ActiveDoc.GetElement(x))
@@ -137,11 +156,11 @@ namespace mertens3d.FabProAddOn.v2019.Models
                 .FirstOrDefault() as AssemblyInstance;
 
             FilteredElementCollector collector = new FilteredElementCollector(ActiveDoc, ActiveView.Id);
-            
-                assemblyElem = collector
-                .OfClass(typeof(AssemblyInstance))
-                .Cast<AssemblyInstance>()
-                .FirstOrDefault();
+
+            assemblyElem = collector
+            .OfClass(typeof(AssemblyInstance))
+            .Cast<AssemblyInstance>()
+            .FirstOrDefault();
 
             if (assemblyElem != null)
             {
@@ -153,7 +172,7 @@ namespace mertens3d.FabProAddOn.v2019.Models
                     if (foundTb != null)
                     {
                         var viewSheet = AssemblyViewUtils.CreateSheet(ActiveDoc, assemblyElem.Id, foundTb);
-                        if(viewSheet != null)
+                        if (viewSheet != null)
                         {
                             toReturn.MarkSuccessful();
                         }

@@ -16,11 +16,14 @@ namespace FabPro.Shared.Views
 
             Hub = hub;
             DataContext = Hub;
+            this.idCtrlViews.DataContext = hub;
+            this.idCtrlViews.InitCtrl();
+
         }
 
         public MainControl()
         {
-            InitializeComponent();
+            Init();
         }
 
         private void IdCreateAssemblyElem_Click(object sender, RoutedEventArgs e)

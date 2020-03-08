@@ -14,12 +14,12 @@ namespace FabPro.Shared.Managers
         public EventsManager EventMan { get { return _eventManager ?? (_eventManager = new EventsManager(this)); } }
         public RevitManager RevitMan { get { return _revitManager ?? (_revitManager = new RevitManager(this)); } }
 
-        public ManagerHub(IVerSpec verSpec)
+        public ManagerHub(IRevitActionsVerSpec verSpec)
         {
             VerSpec = verSpec;
         }
 
-        public IVerSpec VerSpec { get; private set; }
+        public IRevitActionsVerSpec VerSpec { get; private set; }
 
         public bool TriggerBigBang()
         {

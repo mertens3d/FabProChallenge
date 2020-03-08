@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="AssemblyFlow.cs" />
     <Compile Include="Models\ManagerHub.cs" />
+    <Compile Include="Models\RevitDocState.cs" />
     <Compile Include="Models\RevitTransaction.cs" />
     <Compile Include="Models\VerSpec.v2019.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,6 +62,10 @@
     <ProjectReference Include="..\FabProChallenge.FuzzyBunny\FabProChallenge.FuzzyBunny.csproj">
       <Project>{db27e70e-35d8-4c64-82bd-9c5ff34aaba7}</Project>
       <Name>FabProChallenge.FuzzyBunny</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FabProChallenge.RevitInterface.vAll\FabProChallenge.RevitInterface.vAll.csproj">
+      <Project>{23136F2A-AE71-49D4-B02A-8A98F92F6EE1}</Project>
+      <Name>FabProChallenge.RevitInterface.vAll</Name>
     </ProjectReference>
     <ProjectReference Include="..\FabProChallenge.Shared\FabProChallenge.Shared.csproj">
       <Project>{7E245983-8837-4467-A5B7-923A77E8C9FC}</Project>

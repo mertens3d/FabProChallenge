@@ -18,7 +18,7 @@ namespace mertens3d.FabProAddOn.v2019
             bool result = false;
             try
             {
-                var verSpec = new VerSpecV2019(externalCommandData);
+                var verSpec = new RevitActionsVerSpectV2019(externalCommandData);
                 var hub = new ManagerHub(verSpec);
                 hub.Init();
                 result = hub.TriggerBigBang();
