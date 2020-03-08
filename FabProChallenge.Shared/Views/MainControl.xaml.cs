@@ -29,6 +29,7 @@ namespace FabPro.Shared.Views
             {
                 Hub.EventMan.OnRequestTriggerCreateAssemblyElem();
             }
+            this.Close();
         }
 
         private void IdCreateAssemblySheet_Click(object sender, RoutedEventArgs e)
@@ -37,6 +38,7 @@ namespace FabPro.Shared.Views
             {
                 Hub.EventMan.OnRequestTriggerCreateAssemblySheet();
             }
+            this.Close();
         }
 
         private void IdCreate3DView_Click(object sender, RoutedEventArgs e)
@@ -45,6 +47,8 @@ namespace FabPro.Shared.Views
             {
                 Hub.EventMan.OnRequestTriggerCreate3DView();
             }
+
+            this.Close();
         }
 
         private void IdPlace3DViewOnSheet_Click(object sender, RoutedEventArgs e)

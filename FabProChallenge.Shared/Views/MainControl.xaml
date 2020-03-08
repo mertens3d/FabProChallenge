@@ -4,14 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:FabPro.Shared.Views"
-             mc:Ignorable="d" Height="250" Width="500">
+             mc:Ignorable="d" Height="280" Width="500">
     <Window.Resources>
         <ResourceDictionary>
+            <Style TargetType="TextBlock" x:Key="ButtonTextBlock">
+                <Setter Property="TextWrapping" Value="Wrap"></Setter>
+                <Setter Property="Margin" Value="1"></Setter>
+                <Setter Property="TextAlignment" Value="Left"></Setter>
+                
+            </Style>
             <Style TargetType="Button" x:Key="TypButton">
+               
                 <Setter Property="Width" Value="200"></Setter>
                 <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                <Setter Property="Height" Value="30"></Setter>
+                <Setter Property="Height" Value="36"></Setter>
                 <Setter Property="Margin" Value="5"></Setter>
+                
             </Style>
             <Style TargetType="StackPanel" x:Key="TypButtonStack">
                 <!--<Setter Property="Width" Value="200"></Setter>-->
@@ -22,8 +30,15 @@
     <Grid>
         <StackPanel Orientation="Horizontal"  >
             <StackPanel Style="{StaticResource TypButtonStack}">
-                <Button Content="Create Assembly Elem" Name="IdCreateAssemblyElem" Style="{StaticResource TypButton}" Click="IdCreateAssemblyElem_Click" />
-                <Button Content="Create Assembly Sheet" Name="IdCreateAssemblySheet" Style="{StaticResource TypButton}" Click="IdCreateAssemblySheet_Click"/>
+                <Button  Name="IdCreateAssemblyElem" Style="{StaticResource TypButton}" Click="IdCreateAssemblyElem_Click" >
+                    <TextBlock Text="Create Assembly From Current Selection"  Style="{StaticResource ButtonTextBlock}">
+                        
+                    </TextBlock>
+                </Button>
+                <Button Name="IdCreateAssemblySheet" Style="{StaticResource TypButton}" Click="IdCreateAssemblySheet_Click">
+                    <TextBlock Text="Create Assembly Sheet From Current Selection" Style="{StaticResource ButtonTextBlock}">
+                    </TextBlock>
+                </Button>
                 <Button Content="Create 3D View" Name="IdCreate3DView" Style="{StaticResource TypButton}" Click="IdCreate3DView_Click"/>
                 <Button Content="Place 3D View on Sheet" Name="IdPlace3DViewOnSheet" Style="{StaticResource TypButton}" Click="IdPlace3DViewOnSheet_Click"/>
                 <Button Content="Add Mark Tags" Name="IdAddMarkTags" Style="{StaticResource TypButton}" Click="IdAddMarkTags_Click"/>

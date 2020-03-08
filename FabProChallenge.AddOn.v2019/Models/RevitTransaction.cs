@@ -1,6 +1,8 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using mertens3d.FabProChallenge.Shared.Interfaces;
+using mertens3d.FabProChallenge.Shared.Models;
+using System.Windows;
 
 namespace mertens3d.FabProChallenge.AddOn.v2019.Models
 {
@@ -23,6 +25,20 @@ namespace mertens3d.FabProChallenge.AddOn.v2019.Models
             catch (System.Exception ex)
             {
                 CurrentError = ex.ToString();
+            }
+        }
+
+        public void CommitIfSuccess(EffortResult result)
+        {
+            if (result.WasSuccessful())
+            {
+                Commit();
+            }
+            else
+            {
+                RollBack();
+
+                MessageBox.Show("Transaction failed: " + result.ErrorMessagesBigString());
             }
         }
 

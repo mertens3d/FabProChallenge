@@ -31,4 +31,4 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("2020.03.07.15583")] //this file auto changed by the Gulp task in C:\Users\info\Documents\Git\mertens3d\FabPro Revit Challenge\CsVersion.js
+[assembly: AssemblyVersion("2020.03.07.18201")] //this file auto changed by the Gulp task in C:\Users\info\Documents\Git\mertens3d\FabPro Revit Challenge\CsVersion.js

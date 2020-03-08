@@ -65,6 +65,7 @@
     <ProjectReference Include="..\FabProChallenge.Shared\FabProChallenge.Shared.csproj">
       <Project>{7E245983-8837-4467-A5B7-923A77E8C9FC}</Project>
       <Name>FabProChallenge.Shared</Name>
+      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

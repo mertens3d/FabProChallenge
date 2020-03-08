@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mertens3d.FabProChallenge.Shared.Models;
+using System;
 
 namespace mertens3d.FabProChallenge.Shared.Interfaces
 {
@@ -11,5 +12,7 @@ namespace mertens3d.FabProChallenge.Shared.Interfaces
         void RollBack();
 
         string CurrentError { get; set; }
+
+        void CommitIfSuccess(EffortResult result);
     }
 }

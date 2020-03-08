@@ -1,21 +1,19 @@
 ﻿using FabPro.Shared.Managers;
 using FabPro.Shared.Views;
-using mertens3d.FabPro.Shared.Models;
+using mertens3d.FabProChallenge.Shared.Models;
 using System;
 
 namespace mertens3d.FabPro.Shared.Managers
 {
     public class UiManager : ManagerBase
     {
-        public UiManager(ManagerHub hub): base(hub)
+        public UiManager(ManagerHub hub) : base(hub)
         {
-
         }
 
-        internal AddOnResult ShowMenu()
+        internal EffortResult ShowMenu()
         {
-
-            var toReturn = new AddOnResult();
+            var toReturn = new EffortResult();
 
             try
             {
@@ -25,12 +23,10 @@ namespace mertens3d.FabPro.Shared.Managers
             }
             catch (Exception ex)
             {
-
-                toReturn.Errors.Add(ex.ToString());
+                toReturn.MarkFailed(ex.ToString());
             }
 
             return toReturn;
-
         }
     }
 }

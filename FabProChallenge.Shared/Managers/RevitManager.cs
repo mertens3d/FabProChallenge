@@ -1,5 +1,6 @@
 ﻿using FabPro.Shared.Managers;
 using mertens3d.FabProChallenge.Shared.Interfaces;
+using mertens3d.FabProChallenge.Shared.Models;
 using System;
 using System.Windows;
 
@@ -7,6 +8,8 @@ namespace mertens3d.FabPro.Shared.Managers
 {
     public class RevitManager : ManagerBase
     {
+        public EffortResult LastEffort { get; set; } = new EffortResult();
+
         public RevitManager(ManagerHub hub) : base(hub)
         {
         }
@@ -42,7 +45,6 @@ namespace mertens3d.FabPro.Shared.Managers
             Hub.EventMan.ActionTriggerCreateTopView -= CreateTopView;
             Hub.EventMan.ActionTriggerCreateTopView += CreateTopView;
 
-
             Hub.EventMan.ActionTriggerCreate3DView -= Create3DView;
             Hub.EventMan.ActionTriggerCreate3DView += Create3DView;
         }
@@ -51,23 +53,20 @@ namespace mertens3d.FabPro.Shared.Managers
         {
             MessageBox.Show("Create 3D View");
 
-            using(IRevitTransaction transaction = Hub.VerSpec.FactoryTransaction("make 3d View", true))
+            using (IRevitTransaction transaction = Hub.VerSpec.FactoryTransaction("make 3d View"))
             {
                 try
                 {
                     transaction.Start();
                     var result = Hub.VerSpec.Create3DView("mertens.gregory " + Guid.NewGuid().ToString());
-                    transaction.Commit();
-
+                    transaction.CommitIfSuccess(result);
                 }
                 catch (Exception ex)
                 {
-
                     transaction.RollBack();
                     MessageBox.Show(ex.ToString());
                 }
             }
-
         }
 
         private void CreateTopView()
@@ -92,12 +91,74 @@ namespace mertens3d.FabPro.Shared.Managers
 
         private void CreateAssemblySheet()
         {
-            MessageBox.Show("Create Assembly Sheet");
+
+            LastEffort = new EffortResult();
+
+            using (IRevitTransaction transaction = Hub.VerSpec.FactoryTransaction("Create Assembly Sheet"))
+            {
+                try
+                {
+                    transaction.Start();
+                    LastEffort = Hub.VerSpec.CreateAssemblySheet();
+                    transaction.CommitIfSuccess(LastEffort);
+
+                }
+                catch (Exception ex)
+                {
+                    transaction.RollBack();
+                    LastEffort.MarkFailed(ex.ToString());
+                    MessageBox.Show(LastEffort.ErrorMessagesBigString().ToString());
+                }
+            }
         }
 
         private void CreateAssemblyElem()
         {
-            MessageBox.Show("Create Assembly Elem");
+            LastEffort = new EffortResult();
+
+            using (IRevitTransaction transaction = Hub.VerSpec.FactoryTransaction("Create Assembly Element"))
+            {
+                try
+                {
+                    transaction.Start();
+                    LastEffort = Hub.VerSpec.CreateAssemblyElem();
+                    transaction.CommitIfSuccess(LastEffort);
+
+                }
+                catch (Exception ex)
+                {
+                    transaction.RollBack();
+                    LastEffort.MarkFailed(ex.ToString());
+                    MessageBox.Show(LastEffort.ErrorMessagesBigString().ToString());
+                }
+            }
+
+            if (LastEffort.WasSuccessful())
+            {
+                var lastElemId = LastEffort.PayloadId;
+
+                LastEffort = new EffortResult();
+                
+                using (IRevitTransaction transaction = Hub.VerSpec.FactoryTransaction("Name Assembly"))
+                {
+                    try
+                    {
+                        transaction.Start();
+                        LastEffort = Hub.VerSpec.NameAssembly("mertens.gregory " + Guid.NewGuid().ToString(), lastElemId);
+                        transaction.CommitIfSuccess(LastEffort);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.RollBack();
+                        LastEffort.MarkFailed(ex.ToString());
+                        MessageBox.Show(LastEffort.ErrorMessagesBigString().ToString());
+                    }
+                }
+            }
+
+
+
         }
 
         private void AddMarks()

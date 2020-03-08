@@ -56,7 +56,7 @@
     <Compile Include="Managers\ManagerHub.cs" />
     <Compile Include="Managers\RevitManager.cs" />
     <Compile Include="Managers\UiManager.cs" />
-    <Compile Include="Models\AddOnResult.cs" />
+    <Compile Include="Models\EffortResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MainControl.xaml.cs">
       <DependentUpon>MainControl.xaml</DependentUpon>
