@@ -2,8 +2,8 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using FabPro.Shared.Managers;
-using mertens3d.FabProAddOn.v2019.Models;
-using System.Reflection;
+using FabProChallenge.RevitInterface.vAll;
+using FabProChallenge.RevitInterface.vAll.Model;
 using System.Windows;
 
 namespace mertens3d.FabProAddOn.v2019
@@ -11,15 +11,20 @@ namespace mertens3d.FabProAddOn.v2019
     [Transaction(TransactionMode.Manual)]
     [Regeneration(RegenerationOption.Manual)]
     [Journaling(JournalingMode.NoCommandData)]
-    internal class Challenge : IExternalCommand
+    internal class ChallengeCommand : IExternalCommand
     {
         public Result Execute(ExternalCommandData externalCommandData, ref string message, ElementSet elements)
         {
             bool result = false;
             try
             {
-                var verSpec = new RevitActionsVerSpectV2019(externalCommandData);
-                var hub = new ManagerHub(verSpec);
+                IRevitCRUDVSpec revitVspec2019 = new RevitCRUDVSpec2019(externalCommandData);
+                var revitcrudHub = new RevitCrudHub(externalCommandData, revitVspec2019);
+
+                RevitBroker revitBroker = new RevitBroker(revitcrudHub);
+
+                var hub = new ManagerHub(revitBroker);
+
                 hub.Init();
                 result = hub.TriggerBigBang();
             }

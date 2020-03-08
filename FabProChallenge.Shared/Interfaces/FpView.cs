@@ -11,8 +11,8 @@ namespace mertens3d.FabProChallenge.Shared.Interfaces
             this.ViewType = viewType;
         }
 
-        private int ViewId { get; set; }
-        private string ViewFriendly { get; set; }
-        private FpViewTypes ViewType { get; set; }
+        public int ViewId { get; set; }
+        public string ViewFriendly { get; set; }
+        public FpViewTypes ViewType { get; set; }
     }
 }

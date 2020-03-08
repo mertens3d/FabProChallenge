@@ -22,7 +22,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FabProChallenge.AddOn.v2019
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FabProChallenge.Shared", "FabProChallenge.Shared\FabProChallenge.Shared.csproj", "{7E245983-8837-4467-A5B7-923A77E8C9FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FabProChallenge.RevitInterface.vAll", "FabProChallenge.RevitInterface.vAll\FabProChallenge.RevitInterface.vAll.csproj", "{23136F2A-AE71-49D4-B02A-8A98F92F6EE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FabProChallenge.RevitBroker", "FabProChallenge.RevitInterface.vAll\FabProChallenge.RevitBroker.csproj", "{23136F2A-AE71-49D4-B02A-8A98F92F6EE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FabProChallenge.Main", "FabProChallenge.Main\FabProChallenge.Main.csproj", "{9C9B4686-0D6B-4544-920E-FE27A800A367}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +48,10 @@ Global
 		{23136F2A-AE71-49D4-B02A-8A98F92F6EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23136F2A-AE71-49D4-B02A-8A98F92F6EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23136F2A-AE71-49D4-B02A-8A98F92F6EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C9B4686-0D6B-4544-920E-FE27A800A367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C9B4686-0D6B-4544-920E-FE27A800A367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C9B4686-0D6B-4544-920E-FE27A800A367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C9B4686-0D6B-4544-920E-FE27A800A367}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

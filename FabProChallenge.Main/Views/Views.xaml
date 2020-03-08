@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="mertens3d.FabProChallenge.Shared.Views.Views"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:base="clr-namespace:FabProChallenge.Main.Models"
+             mc:Ignorable="d"
+               d:DataContext="{d:DesignInstance d:Type=base:BindableData, IsDesignTimeCreatable=true}"
+             d:DesignHeight="200" d:DesignWidth="200">
+    <Grid Background="#FFDC1616">
+        <StackPanel>
+            <Label Content="dddddddddddddddd"></Label>
+            <ListBox x:Name="idViews" HorizontalAlignment="Left" Height="200" Margin="10,10,0,0" VerticalAlignment="Top" Width="186" ItemsSource="{Binding Path=BindableData.AllViews, Mode=OneWay}" />
+        </StackPanel>
+    </Grid>
+</UserControl>
