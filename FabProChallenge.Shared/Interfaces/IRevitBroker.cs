@@ -6,10 +6,11 @@ namespace FabPro.Shared.Interfaces
     {
         FpDocState GetFpDocState();
         void AddSelectViewToCurrentSheet(int viewToPlaceId);
-        void Create3DView();
         void CreateAssemblyElem();
         void CreateAssemblySheet();
-        void CreateTopView();
-        void CreateFrontView();
+        void CreateView3D();
+        void CreateViewBOM();
+        void CreateViewFront();
+        void CreateViewTop();
     }
 }

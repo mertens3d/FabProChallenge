@@ -42,6 +42,10 @@ namespace FabProChallenge.RevitInterface.vAll.Utilities
                 {
                     toReturn.Add(oneWorking);
                 }
+                else if (oneWorking.ViewType.Equals(ViewType.Schedule) && oneWorking.IsAssemblyView)
+                {
+                    toReturn.Add(oneWorking);
+                }
             }
 
             return toReturn;

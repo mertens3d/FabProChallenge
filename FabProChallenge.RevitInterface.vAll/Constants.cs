@@ -14,6 +14,7 @@
             {
                 internal static string DetailViewNamePrefix = "mertens.detail.view.";
                 internal static string ThreeDimensionalNamePrefix = "mertens.3d.";
+                internal static string BOMViewNamePrefix = "mertens.BOM.";
             }
         }
 
@@ -27,6 +28,7 @@
                 internal static string CreateThreeDimensionalView = "Create 3d View";
                 internal static string PlaceSelectViewOnSheet = "Place Select View on Current Sheet";
                 internal static string CreateDetailView = "Create Detail View";
+                internal static string CreateBOMView = "Create BOM View";
             }
         }
     }

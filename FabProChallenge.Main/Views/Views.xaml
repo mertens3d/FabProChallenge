@@ -10,7 +10,7 @@
     <DockPanel LastChildFill="True" VerticalAlignment="Stretch">
         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Label Content="Eligible Views"></Label>
-            <ScrollViewer VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <ScrollViewer VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="200">
                 <ListBox x:Name="idViews"  HorizontalAlignment="Right" VerticalAlignment="Stretch"
                      ItemsSource="{Binding Path=BindableData.AllViews, Mode=OneWay}"
                      SelectedIndex="{Binding Path=BindableData.AllViewsSelectedIndex, Mode=TwoWay}" />

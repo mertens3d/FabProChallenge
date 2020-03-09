@@ -15,16 +15,46 @@ namespace FabProChallenge.RevitInterface.vAll.Model
         {
             EffortResult toReturn = new EffortResult();
 
-            var viewType = RevitUtilitiesVAll.GetAllInDocOfType<ViewFamilyType>(ActiveDoc)
-                 .FirstOrDefault(x => x.ViewFamily == ViewFamily.ThreeDimensional);
+            //var viewType = RevitUtilitiesVAll.GetAllInDocOfType<ViewFamilyType>(ActiveDoc)
+            //     .FirstOrDefault(x => x.ViewFamily == ViewFamily.ThreeDimensional);
+            
+            AssemblyInstance selectAssembly = GetSelectAssembly();
 
-            if (viewType != null)
+            if (selectAssembly != null)
             {
-                View3D view3D = View3D.CreateIsometric(ActiveDoc, viewType.Id);
 
-                view3D.Name = viewName;
+                var newView = AssemblyViewUtils.Create3DOrthographic(ActiveDoc, selectAssembly.Id);
+
+                //View3D view3D = View3D.CrkeateIsometric(ActiveDoc, viewType.Id);
+
+                newView.Name = viewName;
 
                 toReturn.MarkSuccessful();
+            }
+
+            return toReturn;
+        }
+
+        private AssemblyInstance GetSelectAssembly()
+        {
+           return RevitUtilitiesVAll.GetSelectElementsOfType<AssemblyInstance>(ActiveUiDoc).FirstOrDefault();
+        }
+
+        private EffortResult CreateBOMView(string viewName)
+        {
+            EffortResult toReturn = new EffortResult();
+
+            AssemblyInstance selectAssembly = GetSelectAssembly();
+
+            if (selectAssembly != null)
+            {
+                var newView = AssemblyViewUtils.CreatePartList(ActiveDoc, selectAssembly.Id);
+                newView.Name = viewName;
+                toReturn.MarkSuccessful();
+            }
+            else
+            {
+                toReturn.MarkFailed("No assembly selected");
             }
 
             return toReturn;
@@ -34,7 +64,7 @@ namespace FabProChallenge.RevitInterface.vAll.Model
         {
             EffortResult toReturn = new EffortResult();
 
-            AssemblyInstance selectAssembly = RevitUtilitiesVAll.GetSelectElementsOfType<AssemblyInstance>(ActiveUiDoc).FirstOrDefault();
+            AssemblyInstance selectAssembly = GetSelectAssembly();
 
             if (selectAssembly != null)
             {
@@ -49,6 +79,31 @@ namespace FabProChallenge.RevitInterface.vAll.Model
 
             return toReturn;
         }
+
+
+        public EffortResult CreateBOMTransaction()
+        {
+            var toReturn = new EffortResult();
+
+            using (IRevitTransaction transaction = CrudHub.RevitCrudVerSpec.FactoryTransaction(Constants.Transactions.Prefix.CreateBOMView))
+            {
+                try
+                {
+                    transaction.Start();
+                    toReturn = this.CreateBOMView(Constants.Views.Prefix.BOMViewNamePrefix +  Guid.NewGuid().ToString());
+                    transaction.CommitIfSuccess(toReturn);
+                }
+                catch (Exception ex)
+                {
+                    transaction.RollBack();
+                    toReturn.MarkFailed(ex.ToString());
+                    MessageBox.Show(toReturn.ErrorMessagesBigString().ToString());
+                }
+            }
+
+            return toReturn;
+        }
+
 
         public EffortResult CreateDetailViewWithTransaction(AssemblyDetailViewOrientation orientation)
         {

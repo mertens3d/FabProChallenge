@@ -50,8 +50,13 @@ namespace FabProChallenge.RevitInterface.vAll.Model
                     }
                     else
                     {
-                        LastEffort.MarkFailed("View cannot be added to sheet");
+                        ScheduleSheetInstance.Create(ActiveDoc, asViewSheet.Id, viewToPlaceId, XYZ.Zero);
+                        LastEffort.MarkSuccessful();
                     }
+                    //else
+                    //{
+                    //    LastEffort.MarkFailed("View cannot be added to sheet");
+                    //}
                 }
                 else
                 {

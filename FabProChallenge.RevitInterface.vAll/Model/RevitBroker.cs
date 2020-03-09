@@ -14,17 +14,21 @@ namespace FabProChallenge.RevitInterface.vAll.Model
             this.CrudHub = crudHub;
         }
 
-        public void Create3DView()
+        public void CreateView3D()
         {
             CrudHub.RevitCreate.Create3DViewWithTransaction();
         }
-        public void CreateTopView()
+        public void CreateViewTop()
         {
             CrudHub.RevitCreate.CreateDetailViewWithTransaction(AssemblyDetailViewOrientation.ElevationTop);
         } 
-        public void CreateFrontView()
+        public void CreateViewFront()
         {
             CrudHub.RevitCreate.CreateDetailViewWithTransaction(AssemblyDetailViewOrientation.ElevationFront);
+        }   
+        public void CreateViewBOM()
+        {
+            CrudHub.RevitCreate.CreateBOMTransaction();
         }
         public void CreateAssemblyElem()
         {

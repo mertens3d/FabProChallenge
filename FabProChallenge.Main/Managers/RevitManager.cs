@@ -45,17 +45,17 @@ namespace mertens3d.FabPro.Shared.Managers
             Hub.EventMan.ActionTriggerCreateAssemblySheet -= Broker.CreateAssemblySheet;
             Hub.EventMan.ActionTriggerCreateAssemblySheet += Broker.CreateAssemblySheet;
 
-            Hub.EventMan.ActionTriggerCreateBOM -= CreateBOM;
-            Hub.EventMan.ActionTriggerCreateBOM += CreateBOM;
+            Hub.EventMan.ActionTriggerCreateBOM -= Broker.CreateViewBOM;
+            Hub.EventMan.ActionTriggerCreateBOM += Broker.CreateViewBOM;
 
-            Hub.EventMan.ActionTriggerCreateFrontView -= Broker.CreateFrontView;
-            Hub.EventMan.ActionTriggerCreateFrontView += Broker.CreateFrontView;
+            Hub.EventMan.ActionTriggerCreateFrontView -= Broker.CreateViewFront;
+            Hub.EventMan.ActionTriggerCreateFrontView += Broker.CreateViewFront;
 
-            Hub.EventMan.ActionTriggerCreateTopView -= Broker.CreateTopView;
-            Hub.EventMan.ActionTriggerCreateTopView += Broker.CreateTopView;
+            Hub.EventMan.ActionTriggerCreateTopView -= Broker.CreateViewTop;
+            Hub.EventMan.ActionTriggerCreateTopView += Broker.CreateViewTop;
 
-            Hub.EventMan.ActionTriggerCreate3DView -= Broker.Create3DView;
-            Hub.EventMan.ActionTriggerCreate3DView += Broker.Create3DView;
+            Hub.EventMan.ActionTriggerCreate3DView -= Broker.CreateView3D;
+            Hub.EventMan.ActionTriggerCreate3DView += Broker.CreateView3D;
         }
 
         private void AddSelectViewToCurrentSheet()
@@ -69,11 +69,6 @@ namespace mertens3d.FabPro.Shared.Managers
             {
                 MessageBox.Show("No currently selected view");
             }
-        }
-
-        private void CreateBOM()
-        {
-            MessageBox.Show("Create BOM - not implemented");
         }
 
         private void AddMarks()
