@@ -1,5 +1,6 @@
 ﻿using FabPro.Shared.Managers;
 using FabPro.Shared.Views;
+using mertens3d.FabProChallenge.Shared.Interfaces;
 using mertens3d.FabProChallenge.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,13 @@ namespace mertens3d.FabPro.Shared.Managers
 {
     public class UiManager : ManagerBase
     {
+        private List<FpView> _viewsToShow;
+
         public UiManager(ManagerHub hub) : base(hub)
         {
         }
 
-        public List<string> ViewsToShow { get { return Hub.RevitMan.GetAllViews().Select(x => x.ViewFriendly).ToList();  } }
+        public List<FpView> ViewsToShow { get { return _viewsToShow ?? (_viewsToShow = Hub.RevitMan.GetAllEligibleViews()); } }
 
         private MainControl mainMenu { get; set; }
 
@@ -29,6 +32,7 @@ namespace mertens3d.FabPro.Shared.Managers
                 mainMenu.ContentRendered += InitBinding;
                 //InitBinding();
                 mainMenu.ShowDialog();
+                toReturn.MarkSuccessful();
             }
             catch (Exception ex)
             {
@@ -42,16 +46,26 @@ namespace mertens3d.FabPro.Shared.Managers
         {
             Hub.BindableData.AllViews = Hub
              .UiMan
-             .ViewsToShow;
-        }
-
-        private void InitBindinxg()
-        {
-          
+             .ViewsToShow
+              .Select(x => x.ViewNameForDialog)
+              .ToList();
         }
 
         private void InitForm(object sender, EventArgs e)
         {
+        }
+
+        internal FpView CurrentSelectViewId()
+        {
+            FpView toReturn = null;
+
+            var selectIndex = Hub.BindableData.AllViewsSelectedIndex;
+            if (ViewsToShow.Any())
+            {
+                toReturn = ViewsToShow[selectIndex];
+            }
+
+            return toReturn;
         }
     }
 }

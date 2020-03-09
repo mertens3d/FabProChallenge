@@ -10,11 +10,11 @@ namespace mertens3d.FabProChallenge.AddOn.v2019.Models
     {
         public Revitv2019Transaction(ExternalCommandData externalCommandData, string title)
         {
-            CurrentTransaction = new Transaction(externalCommandData.Application.ActiveUIDocument.Document, title);
+            CurrentTransaction = new Transaction(externalCommandData.Application.ActiveUIDocument.Document, AddOnConstants.TransactionPrefix + title);
         }
 
         public Transaction CurrentTransaction { get; set; }
-        public string CurrentError { get;  set; }
+        public string CurrentError { get; set; }
 
         public void Commit()
         {

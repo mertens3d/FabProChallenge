@@ -11,11 +11,64 @@ namespace FabProChallenge.RevitInterface.vAll.Model
 {
     internal class RevitCreate : RevitCrudBase
     {
-      
-
         public EffortResult Create3DView(string viewName)
         {
+            EffortResult toReturn = new EffortResult();
+
+            var viewType = RevitUtilitiesVAll.GetAllInDocOfType<ViewFamilyType>(ActiveDoc)
+                 .FirstOrDefault(x => x.ViewFamily == ViewFamily.ThreeDimensional);
+
+            if (viewType != null)
+            {
+                View3D view3D = View3D.CreateIsometric(ActiveDoc, viewType.Id);
+
+                view3D.Name = viewName;
+
+                toReturn.MarkSuccessful();
+            }
+
+            return toReturn;
+        }
+
+        private EffortResult CreateDetailView(string viewName, AssemblyDetailViewOrientation orientation)
+        {
+            EffortResult toReturn = new EffortResult();
+
+            AssemblyInstance selectAssembly = RevitUtilitiesVAll.GetSelectElementsOfType<AssemblyInstance>(ActiveUiDoc).FirstOrDefault();
+
+            if (selectAssembly != null)
+            {
+                var newView = AssemblyViewUtils.CreateDetailSection(ActiveDoc, selectAssembly.Id, orientation);
+                newView.Name = viewName;
+                toReturn.MarkSuccessful();
+            }
+            else
+            {
+                toReturn.MarkFailed("No assembly selected");
+            }
+
+            return toReturn;
+        }
+
+        public EffortResult CreateDetailViewWithTransaction(AssemblyDetailViewOrientation orientation)
+        {
             var toReturn = new EffortResult();
+
+            using (IRevitTransaction transaction = CrudHub.RevitCrudVerSpec.FactoryTransaction(Constants.Transactions.Prefix.CreateDetailView))
+            {
+                try
+                {
+                    transaction.Start();
+                    toReturn = this.CreateDetailView(Constants.Views.Prefix.DetailViewNamePrefix + "." + orientation.ToString() + "." + Guid.NewGuid().ToString(), orientation);
+                    transaction.CommitIfSuccess(toReturn);
+                }
+                catch (Exception ex)
+                {
+                    transaction.RollBack();
+                    toReturn.MarkFailed(ex.ToString());
+                    MessageBox.Show(toReturn.ErrorMessagesBigString().ToString());
+                }
+            }
 
             return toReturn;
         }
@@ -24,7 +77,7 @@ namespace FabProChallenge.RevitInterface.vAll.Model
         {
             var toReturn = new EffortResult();
 
-            using (IRevitTransaction transaction = CrudHub.RevitCrudVerSpec.FactoryTransaction("Create Assembly Element"))
+            using (IRevitTransaction transaction = CrudHub.RevitCrudVerSpec.FactoryTransaction(Constants.Transactions.Prefix.CreateAssemblyElement))
             {
                 try
                 {
@@ -46,12 +99,12 @@ namespace FabProChallenge.RevitInterface.vAll.Model
 
                 toReturn = new EffortResult();
 
-                using (IRevitTransaction transaction = CrudHub.RevitCrudVerSpec.FactoryTransaction("Name Assembly"))
+                using (IRevitTransaction transaction = CrudHub.RevitCrudVerSpec.FactoryTransaction(Constants.Transactions.Prefix.NameAssembly))
                 {
                     try
                     {
                         transaction.Start();
-                        toReturn = CrudHub.RevitUpdate.NameAssembly("mertens.gregory " + Guid.NewGuid().ToString(), lastElemId);
+                        toReturn = CrudHub.RevitUpdate.NameAssembly(Constants.AssemblyNamePrefix + Guid.NewGuid().ToString(), lastElemId);
                         transaction.CommitIfSuccess(toReturn);
                     }
                     catch (Exception ex)
@@ -98,16 +151,16 @@ namespace FabProChallenge.RevitInterface.vAll.Model
         {
             var toReturn = new EffortResult();
 
-            var selectAssembly = RevitUtilitiesVAll.GetSelectElements(ActiveUiDoc);
+            //var selectAssembly = RevitUtilitiesVAll.GetSelectElements(ActiveUiDoc);
 
             AssemblyInstance assemblyElem = RevitUtilitiesVAll.GetSelectElementsOfType<AssemblyInstance>(ActiveUiDoc).FirstOrDefault();
 
-            FilteredElementCollector collector = new FilteredElementCollector(ActiveDoc, ActiveView.Id);
+            //FilteredElementCollector collector = new FilteredElementCollector(ActiveDoc, ActiveView.Id);
 
-            assemblyElem = collector
-            .OfClass(typeof(AssemblyInstance))
-            .Cast<AssemblyInstance>()
-            .FirstOrDefault();
+            //assemblyElem = collector
+            //.OfClass(typeof(AssemblyInstance))
+            //.Cast<AssemblyInstance>()
+            //.FirstOrDefault();
 
             if (assemblyElem != null)
             {
@@ -145,7 +198,7 @@ namespace FabProChallenge.RevitInterface.vAll.Model
         {
             EffortResult LastEffort = new EffortResult();
 
-            using (IRevitTransaction transaction = CrudHub.RevitCrudVerSpec.FactoryTransaction("Create Assembly Sheet"))
+            using (IRevitTransaction transaction = CrudHub.RevitCrudVerSpec.FactoryTransaction(Constants.Transactions.Prefix.CreateAssemblySheet))
             {
                 try
                 {
@@ -168,24 +221,26 @@ namespace FabProChallenge.RevitInterface.vAll.Model
         {
         }
 
-        public void Create3DView()
+        public EffortResult Create3DViewWithTransaction()
         {
-            MessageBox.Show("Create 3D View");
+            var effortResult = new EffortResult();
 
-            using (IRevitTransaction transaction = CrudHub.RevitCrudVerSpec.FactoryTransaction("make 3d View"))
+            using (IRevitTransaction transaction = CrudHub.RevitCrudVerSpec.FactoryTransaction(Constants.Transactions.Prefix.CreateThreeDimensionalView))
             {
                 try
                 {
                     transaction.Start();
-                    var result = CrudHub.RevitCreate.Create3DView("mertens.gregory " + Guid.NewGuid().ToString());
-                    transaction.CommitIfSuccess(result);
+                    effortResult = CrudHub.RevitCreate.Create3DView(Constants.Views.Prefix.ThreeDimensionalNamePrefix + Guid.NewGuid().ToString());
+                    transaction.CommitIfSuccess(effortResult);
                 }
                 catch (Exception ex)
                 {
                     transaction.RollBack();
-                    MessageBox.Show(ex.ToString());
+                    effortResult.MarkFailed(ex.ToString());
                 }
             }
+
+            return effortResult;
         }
     }
 }

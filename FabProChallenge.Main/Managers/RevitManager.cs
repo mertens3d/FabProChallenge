@@ -21,9 +21,9 @@ namespace mertens3d.FabPro.Shared.Managers
             Broker = broker;
         }
 
-        internal List<FpView> GetAllViews()
+        internal List<FpView> GetAllEligibleViews()
         {
-            return FpDocState.Views;
+            return FpDocState.ElegibleViews;
         }
 
         public void Init()
@@ -33,8 +33,8 @@ namespace mertens3d.FabPro.Shared.Managers
 
         public void SubscribeToMenuEvents()
         {
-            Hub.EventMan.ActionTriggerPlaceOnSheet -= PlaceOnSheet;
-            Hub.EventMan.ActionTriggerPlaceOnSheet += PlaceOnSheet;
+            Hub.EventMan.ActionTriggerPlaceSelectViewOnSheet -= AddSelectViewToCurrentSheet;
+            Hub.EventMan.ActionTriggerPlaceSelectViewOnSheet += AddSelectViewToCurrentSheet;
 
             Hub.EventMan.ActionTriggerAddMarks -= AddMarks;
             Hub.EventMan.ActionTriggerAddMarks += AddMarks;
@@ -48,32 +48,27 @@ namespace mertens3d.FabPro.Shared.Managers
             Hub.EventMan.ActionTriggerCreateBOM -= CreateBOM;
             Hub.EventMan.ActionTriggerCreateBOM += CreateBOM;
 
-            Hub.EventMan.ActionTriggerCreateFrontView -= CreateFrontView;
-            Hub.EventMan.ActionTriggerCreateFrontView += CreateFrontView;
+            Hub.EventMan.ActionTriggerCreateFrontView -= Broker.CreateFrontView;
+            Hub.EventMan.ActionTriggerCreateFrontView += Broker.CreateFrontView;
 
-            Hub.EventMan.ActionTriggerCreateTopAndFrontViews -= CreateTopAndFrontViews;
-            Hub.EventMan.ActionTriggerCreateTopAndFrontViews += CreateTopAndFrontViews;
-
-            Hub.EventMan.ActionTriggerCreateTopView -= CreateTopView;
-            Hub.EventMan.ActionTriggerCreateTopView += CreateTopView;
+            Hub.EventMan.ActionTriggerCreateTopView -= Broker.CreateTopView;
+            Hub.EventMan.ActionTriggerCreateTopView += Broker.CreateTopView;
 
             Hub.EventMan.ActionTriggerCreate3DView -= Broker.Create3DView;
             Hub.EventMan.ActionTriggerCreate3DView += Broker.Create3DView;
         }
 
-        private void CreateTopView()
+        private void AddSelectViewToCurrentSheet()
         {
-            MessageBox.Show("Create Top View - not implemented");
-        }
-
-        private void CreateTopAndFrontViews()
-        {
-            MessageBox.Show("Dim Top and Front - not implemented");
-        }
-
-        private void CreateFrontView()
-        {
-            MessageBox.Show("Create Front View - not implemented");
+            FpView currentlySelectViewId = Hub.UiMan.CurrentSelectViewId();
+            if (currentlySelectViewId != null)
+            {
+                Broker.AddSelectViewToCurrentSheet(currentlySelectViewId.ViewId);
+            }
+            else
+            {
+                MessageBox.Show("No currently selected view");
+            }
         }
 
         private void CreateBOM()
@@ -84,11 +79,6 @@ namespace mertens3d.FabPro.Shared.Managers
         private void AddMarks()
         {
             MessageBox.Show("Add Marks - not implemented");
-        }
-
-        private void PlaceOnSheet()
-        {
-            MessageBox.Show("Place On Sheet - not implemented");
         }
     }
 }

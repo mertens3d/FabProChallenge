@@ -16,7 +16,6 @@ namespace mertens3d.FabProAddOn.v2019
 
             if (CommandData != null)
             {
-                //CrudHub.RevitCrudVerSpec.FactoryTransaction(CommandData, transactionName) 
                 toReturn = new Revitv2019Transaction(CommandData, transactionName);
             }
 

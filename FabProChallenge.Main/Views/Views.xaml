@@ -7,10 +7,14 @@
              mc:Ignorable="d"
                d:DataContext="{d:DesignInstance d:Type=base:BindableData, IsDesignTimeCreatable=true}"
              d:DesignHeight="200" d:DesignWidth="200">
-    <Grid Background="#FFDC1616">
-        <StackPanel>
-            <Label Content="dddddddddddddddd"></Label>
-            <ListBox x:Name="idViews" HorizontalAlignment="Left" Height="200" Margin="10,10,0,0" VerticalAlignment="Top" Width="186" ItemsSource="{Binding Path=BindableData.AllViews, Mode=OneWay}" />
+    <DockPanel LastChildFill="True" VerticalAlignment="Stretch">
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Label Content="Eligible Views"></Label>
+            <ScrollViewer VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <ListBox x:Name="idViews"  HorizontalAlignment="Right" VerticalAlignment="Stretch"
+                     ItemsSource="{Binding Path=BindableData.AllViews, Mode=OneWay}"
+                     SelectedIndex="{Binding Path=BindableData.AllViewsSelectedIndex, Mode=TwoWay}" />
+            </ScrollViewer>
         </StackPanel>
-    </Grid>
+    </DockPanel>
 </UserControl>

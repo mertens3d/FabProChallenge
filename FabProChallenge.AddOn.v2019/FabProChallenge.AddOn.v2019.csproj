@@ -60,10 +60,6 @@
     <Compile Include="RevitCRUDVSpec2019.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FabProChallenge.FuzzyBunny\FabProChallenge.FuzzyBunny.csproj">
-      <Project>{db27e70e-35d8-4c64-82bd-9c5ff34aaba7}</Project>
-      <Name>FabProChallenge.FuzzyBunny</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FabProChallenge.Main\FabProChallenge.Main.csproj">
       <Project>{9C9B4686-0D6B-4544-920E-FE27A800A367}</Project>
       <Name>FabProChallenge.Main</Name>

@@ -4,6 +4,7 @@ using Autodesk.Revit.UI;
 using FabPro.Shared.Managers;
 using FabProChallenge.RevitInterface.vAll;
 using FabProChallenge.RevitInterface.vAll.Model;
+using mertens3d.FabProChallenge.Shared.Models;
 using System.Windows;
 
 namespace mertens3d.FabProAddOn.v2019
@@ -15,7 +16,7 @@ namespace mertens3d.FabProAddOn.v2019
     {
         public Result Execute(ExternalCommandData externalCommandData, ref string message, ElementSet elements)
         {
-            bool result = false;
+            EffortResult result = new EffortResult();
             try
             {
                 IRevitCRUDVSpec revitVspec2019 = new RevitCRUDVSpec2019(externalCommandData);
@@ -30,10 +31,15 @@ namespace mertens3d.FabProAddOn.v2019
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                result.MarkFailed(ex.ToString());
             }
 
-            return result ? Result.Succeeded : Result.Failed;
+            if (!result.WasSuccessful())
+            {
+                MessageBox.Show(result.ErrorMessagesBigString());
+            }
+
+            return result.WasSuccessful() ? Result.Succeeded : Result.Failed;
         }
     }
 }

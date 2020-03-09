@@ -4,12 +4,12 @@ namespace FabPro.Shared.Interfaces
 {
     public interface IRevitBroker
     {
-        void Create3DView();
-
-        void CreateAssemblyElem();
-
-        void CreateAssemblySheet();
-
         FpDocState GetFpDocState();
+        void AddSelectViewToCurrentSheet(int viewToPlaceId);
+        void Create3DView();
+        void CreateAssemblyElem();
+        void CreateAssemblySheet();
+        void CreateTopView();
+        void CreateFrontView();
     }
 }

@@ -16,8 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{A9FF3BAA-C
 		gulpFile.js = gulpFile.js
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FabProChallenge.FuzzyBunny", "FabProChallenge.FuzzyBunny\FabProChallenge.FuzzyBunny.csproj", "{DB27E70E-35D8-4C64-82BD-9C5FF34AABA7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FabProChallenge.AddOn.v2019", "FabProChallenge.AddOn.v2019\FabProChallenge.AddOn.v2019.csproj", "{3091BE22-F19C-46E2-ACDF-FBB3DA22197D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FabProChallenge.Shared", "FabProChallenge.Shared\FabProChallenge.Shared.csproj", "{7E245983-8837-4467-A5B7-923A77E8C9FC}"
@@ -32,10 +30,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DB27E70E-35D8-4C64-82BD-9C5FF34AABA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DB27E70E-35D8-4C64-82BD-9C5FF34AABA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DB27E70E-35D8-4C64-82BD-9C5FF34AABA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DB27E70E-35D8-4C64-82BD-9C5FF34AABA7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3091BE22-F19C-46E2-ACDF-FBB3DA22197D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3091BE22-F19C-46E2-ACDF-FBB3DA22197D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3091BE22-F19C-46E2-ACDF-FBB3DA22197D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -58,6 +52,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{24CBC07D-1447-4752-ACA6-1208C194BED0} = {D694049F-C9FC-4CD3-962C-5E719E1FFED0}
+		{3091BE22-F19C-46E2-ACDF-FBB3DA22197D} = {24CBC07D-1447-4752-ACA6-1208C194BED0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF5D129D-A71C-4417-964D-17E426E7D44D}

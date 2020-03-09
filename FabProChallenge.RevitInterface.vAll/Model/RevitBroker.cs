@@ -1,7 +1,6 @@
-﻿using FabPro.Shared.Interfaces;
-using mertens3d.FabProChallenge.Shared.Interfaces;
+﻿using Autodesk.Revit.DB;
+using FabPro.Shared.Interfaces;
 using mertens3d.FabProChallenge.Shared.Models;
-using System.Collections.Generic;
 
 namespace FabProChallenge.RevitInterface.vAll.Model
 {
@@ -17,23 +16,35 @@ namespace FabProChallenge.RevitInterface.vAll.Model
 
         public void Create3DView()
         {
-            CrudHub.RevitCreate.Create3DView();
+            CrudHub.RevitCreate.Create3DViewWithTransaction();
+        }
+        public void CreateTopView()
+        {
+            CrudHub.RevitCreate.CreateDetailViewWithTransaction(AssemblyDetailViewOrientation.ElevationTop);
+        } 
+        public void CreateFrontView()
+        {
+            CrudHub.RevitCreate.CreateDetailViewWithTransaction(AssemblyDetailViewOrientation.ElevationFront);
         }
         public void CreateAssemblyElem()
         {
             CrudHub.RevitCreate.CreateAssemblyElemTransaction();
-         
         }
+
+        public void AddSelectViewToCurrentSheet(int viewToPlaceId)
+        {
+            CrudHub.RevitUpdate.AddVioewToCurrentSheetTransaction(viewToPlaceId);
+        }
+
         public void CreateAssemblySheet()
         {
             CrudHub.RevitCreate.CreateAssemblySheetWithTransaction();
         }
 
-        public FpDocState GetFpDocState() 
+        public FpDocState GetFpDocState()
         {
             return CrudHub.RevitRead.GetFabProDocState();
         }
-
 
         //    public List<FpView> GetAllViews()
         //    {
@@ -41,7 +52,7 @@ namespace FabProChallenge.RevitInterface.vAll.Model
 
         //            List<FpView> toReturn = new List<FpView>();
 
-        //        var allViews = CrudHub.RevitRead.GetAllViewData(); 
+        //        var allViews = CrudHub.RevitRead.GetAllViewData();
 
         //            return toReturn;
 

@@ -10,12 +10,12 @@ namespace FabProChallenge.RevitInterface.vAll.Utilities
 {
     public static class RevitUtilitiesVAll
     {
-        public static FpDocState GetFabProDocState(Document doc)
+        public static FpDocState GetFabProDocState(Document doc, View activeView)
         {
             var toReturn = new FpDocState();
-            
-            RevitUtilitiesVAll.GetAllViewsInDoc(doc)
-                .ForEach(x => toReturn.Views.Add(new FpView(x.Id.IntegerValue, x.Name, (FpViewTypes)x.ViewType)));
+
+            RevitUtilitiesVAll.GetAllEligibleViews(doc, activeView)
+                .ForEach(x => toReturn.ElegibleViews.Add(new FpView(x.Id.IntegerValue, x.Name, (FpViewTypes)x.ViewType)));
 
             return toReturn;
         }
@@ -30,9 +30,21 @@ namespace FabProChallenge.RevitInterface.vAll.Utilities
             return found.Id;
         }
 
-        public static List<View> GetAllViewsInDoc(Document doc)
+        public static List<View> GetAllEligibleViews(Document doc, View activeView)
         {
-            return GetAllInDocOfType<View>(doc);
+            var toReturn = new List<View>();
+
+            List<View> working = GetAllInDocOfType<View>(doc);
+
+            foreach (var oneWorking in working)
+            {
+                if (Viewport.CanAddViewToSheet(doc, activeView.Id, oneWorking.Id))
+                {
+                    toReturn.Add(oneWorking);
+                }
+            }
+
+            return toReturn;
         }
 
         public static List<T> GetSelectElementsOfType<T>(UIDocument doc)
@@ -41,7 +53,7 @@ namespace FabProChallenge.RevitInterface.vAll.Utilities
               RevitUtilitiesVAll.GetSelectElements(doc)
               .Select(x => doc.Application.ActiveUIDocument.Document.GetElement(x))
               .Where(x => x.GetType() == typeof(T))
-              .Cast<T>() 
+              .Cast<T>()
               .ToList();
 
             return toReturn;

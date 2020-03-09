@@ -21,7 +21,7 @@ namespace FabPro.Shared.Interfaces
 
         internal FpDocState GetFabProDocState()
         {
-            return RevitUtilitiesVAll.GetFabProDocState(ActiveDoc);
+            return RevitUtilitiesVAll.GetFabProDocState(ActiveDoc, ActiveView);
         }
     }
 }

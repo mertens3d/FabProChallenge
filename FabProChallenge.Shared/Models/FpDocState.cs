@@ -5,6 +5,6 @@ namespace mertens3d.FabProChallenge.Shared.Models
 {
     public class FpDocState
     {
-        public List<FpView> Views { get; } = new List<FpView>();
+        public List<FpView> ElegibleViews { get; } = new List<FpView>();
     }
 }

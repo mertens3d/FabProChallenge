@@ -13,11 +13,9 @@ namespace mertens3d.FabPro.Shared.Managers
 
         internal event Action ActionTriggerCreateAssemblySheet;
 
-        internal event Action ActionTriggerPlaceOnSheet;
+        internal event Action ActionTriggerPlaceSelectViewOnSheet;
 
         internal event Action ActionTriggerCreateBOM;
-
-        internal event Action ActionTriggerCreateTopAndFrontViews;
 
         internal event Action ActionTriggerCreateFrontView;
 
@@ -51,11 +49,11 @@ namespace mertens3d.FabPro.Shared.Managers
             }
         }
 
-        internal void OnRequestPlaceOnSheet()
+        internal void OnRequestPlaceSelectViewOnActiveSheet()
         {
-            if (ActionTriggerPlaceOnSheet != null)
+            if (ActionTriggerPlaceSelectViewOnSheet != null)
             {
-                ActionTriggerPlaceOnSheet.Invoke();
+                ActionTriggerPlaceSelectViewOnSheet.Invoke();
             }
         }
 
@@ -64,14 +62,6 @@ namespace mertens3d.FabPro.Shared.Managers
             if (ActionTriggerCreateBOM != null)
             {
                 ActionTriggerCreateBOM.Invoke();
-            }
-        }
-
-        internal void OnRequestTriggerCreateDimensionTopandFrontViews()
-        {
-            if (ActionTriggerCreateTopAndFrontViews != null)
-            {
-                ActionTriggerCreateTopAndFrontViews.Invoke();
             }
         }
 

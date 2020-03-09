@@ -7,6 +7,7 @@ namespace FabProChallenge.Main.Models
     public class BindableData : INotifyPropertyChanged
     {
         private List<string> _allViews = new List<string>();
+        private int _allViewsSelectIndex = 0;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -24,6 +25,19 @@ namespace FabProChallenge.Main.Models
             set
             {
                 _allViews = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int AllViewsSelectedIndex
+        {
+            get
+            {
+                return _allViewsSelectIndex;
+            }
+            set
+            {
+                _allViewsSelectIndex = value;
                 OnPropertyChanged();
             }
         }

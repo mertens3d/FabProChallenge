@@ -1,6 +1,7 @@
 ﻿using FabProChallenge.Main.Models;
 using FabProChallenge.RevitInterface.vAll.Model;
 using mertens3d.FabPro.Shared.Managers;
+using mertens3d.FabProChallenge.Shared.Models;
 
 namespace FabPro.Shared.Managers
 {
@@ -24,13 +25,11 @@ namespace FabPro.Shared.Managers
             this.Broker = broker;
         }
 
-        public bool TriggerBigBang()
+        public EffortResult TriggerBigBang()
         {
-            var result = false;
+            EffortResult result = UiMan.ShowMenu();
 
-            UiMan.ShowMenu();
-
-            return true;
+            return result;
         }
 
         public void Init()

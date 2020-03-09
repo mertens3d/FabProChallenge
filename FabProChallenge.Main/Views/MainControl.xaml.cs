@@ -15,23 +15,7 @@ namespace FabPro.Shared.Views
         {
             Hub = hub;
             DataContext = Hub;
-            //if (idCtrlViews != null)
-            //{
-
-            //    idCtrlViews.Loaded += InitViews;
-                
-            //}
         }
-
-        //private void InitViews(object sender, RoutedEventArgs e)
-        //{
-        //    if(idCtrlViews != null)
-        //    {
-
-        //    //this.idCtrlViews.DataContext = Hub;
-        //    this.idCtrlViews.InitCtrl();
-        //    }
-        //}
 
         public MainControl()
         {
@@ -66,12 +50,13 @@ namespace FabPro.Shared.Views
             this.Close();
         }
 
-        private void IdPlace3DViewOnSheet_Click(object sender, RoutedEventArgs e)
+        private void IdPlaceSelectViewOnActiveSheet_Click(object sender, RoutedEventArgs e)
         {
             if (Hub != null)
             {
-                Hub.EventMan.OnRequestPlaceOnSheet();
+                Hub.EventMan.OnRequestPlaceSelectViewOnActiveSheet();
             }
+            this.Close();
         }
 
         private void IdAddMarkTags_Click(object sender, RoutedEventArgs e)
@@ -80,6 +65,7 @@ namespace FabPro.Shared.Views
             {
                 Hub.EventMan.OnRequestTriggerAddMarks();
             }
+            this.Close();
         }
 
         private void IdCreateTopView_Click(object sender, RoutedEventArgs e)
@@ -88,6 +74,8 @@ namespace FabPro.Shared.Views
             {
                 Hub.EventMan.OnRequestTriggerCreateTopView();
             }
+
+            this.Close();
         }
 
         private void IdCreateFrontView_Click(object sender, RoutedEventArgs e)
@@ -96,15 +84,9 @@ namespace FabPro.Shared.Views
             {
                 Hub.EventMan.OnRequestTriggerCreateFrontView();
             }
+            this.Close();
         }
 
-        private void IdDimensionTopandFrontViews_Click(object sender, RoutedEventArgs e)
-        {
-            if (Hub != null)
-            {
-                Hub.EventMan.OnRequestTriggerCreateDimensionTopandFrontViews();
-            }
-        }
 
         private void IdCreateBillOfMaterialsSchedule_Click(object sender, RoutedEventArgs e)
         {
@@ -112,6 +94,7 @@ namespace FabPro.Shared.Views
             {
                 Hub.EventMan.OnRequestTriggerCreateBOM();
             }
+            this.Close();
         }
 
     }
