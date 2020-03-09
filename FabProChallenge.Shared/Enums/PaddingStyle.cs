@@ -4,6 +4,5 @@
     {
         Undefined = 0,
         ElipsesRight = 1
-
     }
 }

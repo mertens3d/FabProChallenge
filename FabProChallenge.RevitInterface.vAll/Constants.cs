@@ -4,9 +4,6 @@
     {
         internal static string AssemblyNamePrefix = "mertens.";
         internal static string TargetTitleBlockName = "B 11 x 17 Horizontal";
-        
-        
-
 
         internal struct Views
         {

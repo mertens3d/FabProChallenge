@@ -8,6 +8,5 @@ namespace FabProChallenge.RevitInterface.vAll
         ExternalCommandData CommandData { get; set; }
 
         IRevitTransaction FactoryTransaction(string transactionName);
-
     }
 }

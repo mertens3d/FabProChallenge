@@ -9,7 +9,6 @@ namespace mertens3d.FabProAddOn.v2019
     {
         public ExternalCommandData CommandData { get; set; }
 
-
         public IRevitTransaction FactoryTransaction(string transactionName)
         {
             IRevitTransaction toReturn = null;

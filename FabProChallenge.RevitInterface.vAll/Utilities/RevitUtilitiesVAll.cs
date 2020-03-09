@@ -14,7 +14,7 @@ namespace FabProChallenge.RevitInterface.vAll.Utilities
         {
             var toReturn = new FpDocState();
 
-            RevitUtilitiesVAll.GetAllEligibleViews(doc, activeView)
+            GetAllEligibleViews(doc, activeView)
                 .ForEach(x => toReturn.ElegibleViews.Add(new FpView(x.Id.IntegerValue, x.Name, (FpViewTypes)x.ViewType)));
 
             return toReturn;

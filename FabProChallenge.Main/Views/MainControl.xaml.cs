@@ -1,5 +1,4 @@
 ﻿using FabPro.Shared.Managers;
-using System;
 using System.Windows;
 
 namespace FabPro.Shared.Views
@@ -87,7 +86,6 @@ namespace FabPro.Shared.Views
             this.Close();
         }
 
-
         private void IdCreateBillOfMaterialsSchedule_Click(object sender, RoutedEventArgs e)
         {
             if (Hub != null)
@@ -96,6 +94,5 @@ namespace FabPro.Shared.Views
             }
             this.Close();
         }
-
     }
 }

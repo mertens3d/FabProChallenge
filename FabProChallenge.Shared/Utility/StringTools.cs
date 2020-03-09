@@ -10,9 +10,9 @@ namespace mertens3d.FabProChallenge.Shared.Utility
 
             if (paddingStyle.Equals(PaddingStyle.ElipsesRight))
             {
-                if (toReturn.Length > finalLength - 3)
+                if (toReturn.Length > finalLength - SharedConstants.Misc.Elipses.Length)
                 {
-                    toReturn = toReturn.Substring(0, finalLength - 3) + "...";
+                    toReturn = toReturn.Substring(0, finalLength - SharedConstants.Misc.Elipses.Length) + SharedConstants.Misc.Elipses;
                 }
             }
 

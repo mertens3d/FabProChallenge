@@ -53,10 +53,6 @@ namespace FabProChallenge.RevitInterface.vAll.Model
                         ScheduleSheetInstance.Create(ActiveDoc, asViewSheet.Id, viewToPlaceId, XYZ.Zero);
                         LastEffort.MarkSuccessful();
                     }
-                    //else
-                    //{
-                    //    LastEffort.MarkFailed("View cannot be added to sheet");
-                    //}
                 }
                 else
                 {

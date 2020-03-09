@@ -10,7 +10,6 @@ namespace FabProChallenge.RevitInterface.vAll.Model
         protected Document ActiveDoc { get { return ActiveUiDoc.Document; } }
         protected View ActiveView { get { return ActiveDoc.ActiveView; } }
 
-
         public ExternalCommandData ExternalCommandData { get; private set; }
 
         protected RevitCrudBase(RevitCrudHub crudHub)

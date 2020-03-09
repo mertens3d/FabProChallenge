@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RevitAddOns", "RevitAddOns"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v2019", "v2019", "{24CBC07D-1447-4752-ACA6-1208C194BED0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{60294F9E-2F24-4BB5-98E4-13669358471E}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{A9FF3BAA-C16F-4A3E-8C9C-AE06E8E3AF0B}"
 	ProjectSection(SolutionItems) = preProject
 		CsProjArray.js = CsProjArray.js

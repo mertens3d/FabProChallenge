@@ -11,14 +11,6 @@ namespace FabPro.Shared.Interfaces
         {
         }
 
-        //FpDocState DocState { get; }
-        //string RevitVersionStr { get; set; }
-
-        //internal List<View> GetAllViewData()
-        //{
-        //  return  RevitUtilitiesVAll.GetAllViewsInDoc(ActiveDoc);
-        //}
-
         internal FpDocState GetFabProDocState()
         {
             return RevitUtilitiesVAll.GetFabProDocState(ActiveDoc, ActiveView);

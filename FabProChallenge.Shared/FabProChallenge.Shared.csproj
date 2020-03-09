@@ -48,7 +48,6 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Enums\FpViewTypes.cs" />
     <Compile Include="Enums\PaddingStyle.cs" />
-    <Compile Include="Interfaces\IFpUpdate.cs" />
     <Compile Include="Interfaces\IRevitBroker.cs" />
     <Compile Include="Interfaces\FpView.cs" />
     <Compile Include="Models\EffortResult.cs" />

@@ -15,17 +15,11 @@ namespace FabProChallenge.RevitInterface.vAll.Model
         {
             EffortResult toReturn = new EffortResult();
 
-            //var viewType = RevitUtilitiesVAll.GetAllInDocOfType<ViewFamilyType>(ActiveDoc)
-            //     .FirstOrDefault(x => x.ViewFamily == ViewFamily.ThreeDimensional);
-            
             AssemblyInstance selectAssembly = GetSelectAssembly();
 
             if (selectAssembly != null)
             {
-
                 var newView = AssemblyViewUtils.Create3DOrthographic(ActiveDoc, selectAssembly.Id);
-
-                //View3D view3D = View3D.CrkeateIsometric(ActiveDoc, viewType.Id);
 
                 newView.Name = viewName;
 
@@ -37,7 +31,7 @@ namespace FabProChallenge.RevitInterface.vAll.Model
 
         private AssemblyInstance GetSelectAssembly()
         {
-           return RevitUtilitiesVAll.GetSelectElementsOfType<AssemblyInstance>(ActiveUiDoc).FirstOrDefault();
+            return RevitUtilitiesVAll.GetSelectElementsOfType<AssemblyInstance>(ActiveUiDoc).FirstOrDefault();
         }
 
         private EffortResult CreateBOMView(string viewName)
@@ -80,7 +74,6 @@ namespace FabProChallenge.RevitInterface.vAll.Model
             return toReturn;
         }
 
-
         public EffortResult CreateBOMTransaction()
         {
             var toReturn = new EffortResult();
@@ -90,7 +83,7 @@ namespace FabProChallenge.RevitInterface.vAll.Model
                 try
                 {
                     transaction.Start();
-                    toReturn = this.CreateBOMView(Constants.Views.Prefix.BOMViewNamePrefix +  Guid.NewGuid().ToString());
+                    toReturn = this.CreateBOMView(Constants.Views.Prefix.BOMViewNamePrefix + Guid.NewGuid().ToString());
                     transaction.CommitIfSuccess(toReturn);
                 }
                 catch (Exception ex)
@@ -103,7 +96,6 @@ namespace FabProChallenge.RevitInterface.vAll.Model
 
             return toReturn;
         }
-
 
         public EffortResult CreateDetailViewWithTransaction(AssemblyDetailViewOrientation orientation)
         {
@@ -181,7 +173,6 @@ namespace FabProChallenge.RevitInterface.vAll.Model
             if (SelectElemIds.Any())
             {
                 ElementId categoryId = ActiveDoc.GetElement(SelectElemIds.First()).Category.Id;
-                //ElementId categoryId = new ElementId( BuiltInCategory.OST_FabricationPipework);
 
                 if (AssemblyInstance.IsValidNamingCategory(ActiveDoc, categoryId, SelectElemIds))
                 {
@@ -206,39 +197,22 @@ namespace FabProChallenge.RevitInterface.vAll.Model
         {
             var toReturn = new EffortResult();
 
-            //var selectAssembly = RevitUtilitiesVAll.GetSelectElements(ActiveUiDoc);
-
-            AssemblyInstance assemblyElem = RevitUtilitiesVAll.GetSelectElementsOfType<AssemblyInstance>(ActiveUiDoc).FirstOrDefault();
-
-            //FilteredElementCollector collector = new FilteredElementCollector(ActiveDoc, ActiveView.Id);
-
-            //assemblyElem = collector
-            //.OfClass(typeof(AssemblyInstance))
-            //.Cast<AssemblyInstance>()
-            //.FirstOrDefault();
+            AssemblyInstance assemblyElem = GetSelectAssembly();
 
             if (assemblyElem != null)
             {
-                //AssemblyType assemblyElem = (AssemblyType)ActiveDoc.GetElement(filteredByType);
-                if (assemblyElem != null)
+                var foundTb = RevitUtilitiesVAll.GetTitleBlockByName(Constants.TargetTitleBlockName, ActiveDoc);
+                if (foundTb != null)
                 {
-                    var foundTb = RevitUtilitiesVAll.GetTitleBlockByName(Constants.TargetTitleBlockName, ActiveDoc);
-                    if (foundTb != null)
+                    var viewSheet = AssemblyViewUtils.CreateSheet(ActiveDoc, assemblyElem.Id, foundTb);
+                    if (viewSheet != null)
                     {
-                        var viewSheet = AssemblyViewUtils.CreateSheet(ActiveDoc, assemblyElem.Id, foundTb);
-                        if (viewSheet != null)
-                        {
-                            toReturn.MarkSuccessful();
-                        }
-                    }
-                    else
-                    {
-                        toReturn.MarkFailed("Unable to find titleblock: " + Constants.TargetTitleBlockName);
+                        toReturn.MarkSuccessful();
                     }
                 }
                 else
                 {
-                    toReturn.MarkFailed("Unable to get assembly from ID");
+                    toReturn.MarkFailed("Unable to find titleblock: " + Constants.TargetTitleBlockName);
                 }
             }
             else

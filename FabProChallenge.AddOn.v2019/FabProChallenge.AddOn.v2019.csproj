@@ -51,13 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyFlow.cs" />
+    <Compile Include="ChallengeCommand.cs" />
     <Compile Include="AddOnConstants.cs" />
-    <Compile Include="Models\RevitDocState.cs" />
     <Compile Include="Models\RevitTransaction.cs" />
-    <Compile Include="Models\VerSpec.v2019.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RevitCRUDVSpec2019.cs" />
+    <Compile Include="Models\RevitCRUDVSpec2019.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FabProChallenge.Main\FabProChallenge.Main.csproj">

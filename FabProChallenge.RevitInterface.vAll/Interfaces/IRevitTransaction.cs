@@ -3,7 +3,6 @@ using System;
 
 namespace FabProChallenge.RevitInterface.vAll.Interfaces
 {
-
     public interface IRevitTransaction : IDisposable
     {
         void Commit();

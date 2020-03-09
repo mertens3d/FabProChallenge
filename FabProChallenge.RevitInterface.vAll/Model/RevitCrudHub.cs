@@ -35,12 +35,10 @@ namespace FabProChallenge.RevitInterface.vAll
 
         public IRevitCRUDVSpec RevitCrudVerSpec { get; set; }
 
-
         public RevitCrudHub(ExternalCommandData ExternalCommandData, IRevitCRUDVSpec revitCrudVerSpec)
         {
             this.ExternalCommandData = ExternalCommandData;
             this.RevitCrudVerSpec = revitCrudVerSpec;
-
         }
     }
 }
